@@ -488,6 +488,23 @@ import {
   LogsTailParamsSchema,
   type LogsTailResult,
   LogsTailResultSchema,
+  type MemoryMigrationItem,
+  MemoryMigrationItemSchema,
+  type MemoryMigrationItemStatus,
+  MemoryMigrationItemStatusSchema,
+  type MemoryMigrationProviderPlan,
+  MemoryMigrationProviderPlanSchema,
+  type MemoryMigrationSummary,
+  MemoryMigrationSummarySchema,
+  MAX_MEMORY_MIGRATION_ITEMS,
+  type MigrationsMemoryApplyParams,
+  MigrationsMemoryApplyParamsSchema,
+  type MigrationsMemoryApplyResult,
+  MigrationsMemoryApplyResultSchema,
+  type MigrationsMemoryPlanParams,
+  MigrationsMemoryPlanParamsSchema,
+  type MigrationsMemoryPlanResult,
+  MigrationsMemoryPlanResultSchema,
   type TerminalAckResult,
   TerminalAckResultSchema,
   type TerminalAttachParams,
@@ -1578,6 +1595,12 @@ export const validateExecApprovalsNodeSnapshot = lazyCompile<ExecApprovalsNodeSn
   ExecApprovalsNodeSnapshotSchema,
 );
 export const validateLogsTailParams = lazyCompile<LogsTailParams>(LogsTailParamsSchema);
+export const validateMigrationsMemoryPlanParams = lazyCompile<MigrationsMemoryPlanParams>(
+  MigrationsMemoryPlanParamsSchema,
+);
+export const validateMigrationsMemoryApplyParams = lazyCompile<MigrationsMemoryApplyParams>(
+  MigrationsMemoryApplyParamsSchema,
+);
 export const validateTerminalOpenParams = lazyCompile<TerminalOpenParams>(TerminalOpenParamsSchema);
 export const validateTerminalInputParams =
   lazyCompile<TerminalInputParams>(TerminalInputParamsSchema);
@@ -1962,6 +1985,15 @@ export {
   CronRunsParamsSchema,
   LogsTailParamsSchema,
   LogsTailResultSchema,
+  MAX_MEMORY_MIGRATION_ITEMS,
+  MemoryMigrationItemStatusSchema,
+  MemoryMigrationItemSchema,
+  MemoryMigrationSummarySchema,
+  MemoryMigrationProviderPlanSchema,
+  MigrationsMemoryPlanParamsSchema,
+  MigrationsMemoryPlanResultSchema,
+  MigrationsMemoryApplyParamsSchema,
+  MigrationsMemoryApplyResultSchema,
   TerminalOpenParamsSchema,
   TerminalOpenResultSchema,
   TerminalInputParamsSchema,
@@ -2379,6 +2411,14 @@ export type {
   ExecApprovalResolveParams,
   LogsTailParams,
   LogsTailResult,
+  MemoryMigrationItemStatus,
+  MemoryMigrationItem,
+  MemoryMigrationSummary,
+  MemoryMigrationProviderPlan,
+  MigrationsMemoryPlanParams,
+  MigrationsMemoryPlanResult,
+  MigrationsMemoryApplyParams,
+  MigrationsMemoryApplyResult,
   TerminalOpenParams,
   TerminalOpenResult,
   TerminalInputParams,
