@@ -14739,7 +14739,7 @@
     },
     {
       "kind": "ui-call",
-      "line": 165,
+      "line": 169,
       "path": "apps/ios/Sources/Design/AgentProTab+Cron.swift",
       "source": "Edit",
       "surface": "apple",
@@ -14747,7 +14747,7 @@
     },
     {
       "kind": "ui-call",
-      "line": 172,
+      "line": 176,
       "path": "apps/ios/Sources/Design/AgentProTab+Cron.swift",
       "source": "Run",
       "surface": "apple",
@@ -14755,7 +14755,7 @@
     },
     {
       "kind": "conditional-branch",
-      "line": 180,
+      "line": 184,
       "path": "apps/ios/Sources/Design/AgentProTab+Cron.swift",
       "source": "Enable",
       "surface": "apple",
@@ -14763,7 +14763,7 @@
     },
     {
       "kind": "conditional-branch",
-      "line": 180,
+      "line": 184,
       "path": "apps/ios/Sources/Design/AgentProTab+Cron.swift",
       "source": "Pause",
       "surface": "apple",
@@ -14771,7 +14771,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 224,
+      "line": 233,
       "path": "apps/ios/Sources/Design/AgentProTab+Cron.swift",
       "source": "Tracking %@ in run history.",
       "surface": "apple",
@@ -14779,7 +14779,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 227,
+      "line": 236,
       "path": "apps/ios/Sources/Design/AgentProTab+Cron.swift",
       "source": "Ran %@. Open Edit for run history.",
       "surface": "apple",
@@ -14787,7 +14787,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 239,
+      "line": 260,
       "path": "apps/ios/Sources/Design/AgentProTab+Cron.swift",
       "source": "Enabled %@.",
       "surface": "apple",
@@ -14795,7 +14795,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 240,
+      "line": 261,
       "path": "apps/ios/Sources/Design/AgentProTab+Cron.swift",
       "source": "Paused %@.",
       "surface": "apple",
@@ -14803,7 +14803,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 292,
+      "line": 316,
       "path": "apps/ios/Sources/Design/AgentProTab+Cron.swift",
       "source": "This automation is not due yet.",
       "surface": "apple",
@@ -14811,7 +14811,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 293,
+      "line": 317,
       "path": "apps/ios/Sources/Design/AgentProTab+Cron.swift",
       "source": "This automation is already running.",
       "surface": "apple",
@@ -14819,7 +14819,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 294,
+      "line": 318,
       "path": "apps/ios/Sources/Design/AgentProTab+Cron.swift",
       "source": "Gateway restart recovery is still in progress.",
       "surface": "apple",
@@ -14827,7 +14827,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 295,
+      "line": 319,
       "path": "apps/ios/Sources/Design/AgentProTab+Cron.swift",
       "source": "This automation has an invalid configuration.",
       "surface": "apple",
@@ -14835,7 +14835,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 296,
+      "line": 320,
       "path": "apps/ios/Sources/Design/AgentProTab+Cron.swift",
       "source": "The automation scheduler is stopped.",
       "surface": "apple",
@@ -14843,7 +14843,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 297,
+      "line": 321,
       "path": "apps/ios/Sources/Design/AgentProTab+Cron.swift",
       "source": "The Gateway did not start this automation.",
       "surface": "apple",
@@ -15859,7 +15859,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 62,
+      "line": 63,
       "path": "apps/ios/Sources/Design/AgentProTab.swift",
       "source": "Enabled",
       "surface": "apple",
@@ -15867,7 +15867,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 63,
+      "line": 64,
       "path": "apps/ios/Sources/Design/AgentProTab.swift",
       "source": "Off",
       "surface": "apple",
@@ -15875,7 +15875,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 64,
+      "line": 65,
       "path": "apps/ios/Sources/Design/AgentProTab.swift",
       "source": "Setup",
       "surface": "apple",
@@ -15883,7 +15883,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 65,
+      "line": 66,
       "path": "apps/ios/Sources/Design/AgentProTab.swift",
       "source": "Blocked",
       "surface": "apple",
@@ -15891,7 +15891,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 82,
+      "line": 83,
       "path": "apps/ios/Sources/Design/AgentProTab.swift",
       "source": "Online",
       "surface": "apple",
@@ -15899,7 +15899,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 83,
+      "line": 84,
       "path": "apps/ios/Sources/Design/AgentProTab.swift",
       "source": "Ready",
       "surface": "apple",
@@ -15907,7 +15907,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 107,
+      "line": 108,
       "path": "apps/ios/Sources/Design/AgentProTab.swift",
       "source": "All",
       "surface": "apple",
@@ -15915,7 +15915,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 108,
+      "line": 109,
       "path": "apps/ios/Sources/Design/AgentProTab.swift",
       "source": "Active",
       "surface": "apple",
@@ -15923,7 +15923,7 @@
     },
     {
       "kind": "ui-localized-call",
-      "line": 109,
+      "line": 110,
       "path": "apps/ios/Sources/Design/AgentProTab.swift",
       "source": "Paused",
       "surface": "apple",
