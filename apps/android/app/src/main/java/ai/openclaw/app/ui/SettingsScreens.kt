@@ -288,6 +288,10 @@ private fun CronJobsSettingsScreen(
   val cronErrorText by viewModel.cronErrorText.collectAsState()
   val isConnected by viewModel.isConnected.collectAsState()
   var selectedJobId by rememberSaveable { mutableStateOf<String?>(null) }
+  var query by rememberSaveable { mutableStateOf("") }
+  var filterName by rememberSaveable { mutableStateOf(CronJobsListFilter.All.name) }
+  val filter = CronJobsListFilter.valueOf(filterName)
+  val visibleJobs = filterCronJobs(cronJobs, query, filter)
   selectedJobId?.let { jobId ->
     CronJobDetailSettingsScreen(
       viewModel = viewModel,
@@ -304,18 +308,37 @@ private fun CronJobsSettingsScreen(
     }
   }
 
-  SettingsDetailFrame(title = nativeString("Cron Jobs"), subtitle = nativeString("Scheduled OpenClaw work from your gateway."), icon = Icons.Default.Bolt, onBack = onBack) {
+  SettingsDetailFrame(title = nativeString("Automations"), subtitle = nativeString("Scheduled OpenClaw work from your gateway."), icon = Icons.Default.Bolt, onBack = onBack) {
     SettingsMetricPanel(
       rows =
         listOf(
           SettingsMetric(nativeString("Status"), if (cronStatus.enabled) nativeString("Enabled") else nativeString("Off")),
-          SettingsMetric(nativeString("Jobs"), cronStatus.jobs.toString()),
+          SettingsMetric(nativeString("Automations"), cronStatus.jobs.toString()),
           SettingsMetric(nativeString("Next Wake"), formatCronWake(cronStatus.nextWakeAtMs)),
         ),
     )
     ClawSecondaryButton(text = if (cronRefreshing) nativeString("Refreshing") else nativeString("Refresh"), onClick = viewModel::refreshCronJobs, enabled = isConnected && !cronRefreshing, modifier = Modifier.fillMaxWidth())
+    ClawTextField(
+      value = query,
+      onValueChange = { query = it },
+      placeholder = nativeString("Search automations"),
+      label = nativeString("Search"),
+      enabled = isConnected,
+    )
+    val filterOptions = CronJobsListFilter.entries.map(CronJobsListFilter::label)
+    ClawSegmentedControl(
+      options = filterOptions,
+      selected = filter.label,
+      onSelect = { selected ->
+        CronJobsListFilter.entries.firstOrNull { it.label == selected }?.let {
+          filterName = it.name
+        }
+      },
+      modifier = Modifier.fillMaxWidth(),
+      enabledOptions = if (isConnected) filterOptions.toSet() else emptySet(),
+    )
     ClawPanel {
-      Text(text = nativeString("Open a job to inspect its configuration and run history. Admin-scoped connections can also run, edit, enable, disable, or delete it."), style = ClawTheme.type.body, color = ClawTheme.colors.textMuted)
+      Text(text = nativeString("Open an automation to inspect its configuration and run history. Admin-scoped connections can also run, edit, enable, disable, or delete it."), style = ClawTheme.type.body, color = ClawTheme.colors.textMuted)
     }
     cronErrorText?.let { errorText ->
       ClawPanel {
@@ -325,16 +348,20 @@ private fun CronJobsSettingsScreen(
     when {
       !isConnected ->
         ClawPanel {
-          Text(text = nativeString("Connect the gateway to load cron jobs."), style = ClawTheme.type.body, color = ClawTheme.colors.textMuted)
+          Text(text = nativeString("Connect the gateway to load automations."), style = ClawTheme.type.body, color = ClawTheme.colors.textMuted)
         }
       cronJobs.isEmpty() ->
         ClawPanel {
           Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
-            Text(text = nativeString("No scheduled jobs."), style = ClawTheme.type.section, color = ClawTheme.colors.text)
+            Text(text = nativeString("No automations yet."), style = ClawTheme.type.section, color = ClawTheme.colors.text)
             Text(text = nativeString("Scheduled work created on the gateway will appear here."), style = ClawTheme.type.body, color = ClawTheme.colors.textMuted)
           }
         }
-      else -> CronJobsPanel(jobs = cronJobs, onJobClick = { selectedJobId = it.id })
+      visibleJobs.isEmpty() ->
+        ClawPanel {
+          Text(text = nativeString("No matching automations."), style = ClawTheme.type.body, color = ClawTheme.colors.textMuted)
+        }
+      else -> CronJobsPanel(jobs = visibleJobs, onJobClick = { selectedJobId = it.id })
     }
   }
 }
@@ -431,8 +458,8 @@ private fun CronJobDetailSettingsScreen(
     if (deleted) leaveDetail()
   }
   SettingsDetailFrame(
-    title = current?.name ?: jobName ?: nativeString("Cron Job"),
-    subtitle = nativeString("Inspect scheduled gateway work."),
+    title = current?.name ?: jobName ?: nativeString("Automation"),
+    subtitle = nativeString("Inspect and manage scheduled gateway work."),
     icon = Icons.Default.Bolt,
     onBack = ::leaveDetail,
   ) {
@@ -453,7 +480,7 @@ private fun CronJobDetailSettingsScreen(
     when {
       !isConnected ->
         ClawPanel {
-          Text(text = nativeString("Connect the gateway to inspect cron jobs."), style = ClawTheme.type.body, color = ClawTheme.colors.textMuted)
+          Text(text = nativeString("Connect the gateway to inspect automations."), style = ClawTheme.type.body, color = ClawTheme.colors.textMuted)
         }
       errorText != null ->
         ClawPanel {
@@ -461,7 +488,7 @@ private fun CronJobDetailSettingsScreen(
         }
       current == null ->
         ClawPanel {
-          Text(text = if (loading) nativeString("Loading cron job…") else nativeString("Cron job not loaded."), style = ClawTheme.type.body, color = ClawTheme.colors.textMuted)
+          Text(text = if (loading) nativeString("Loading automation…") else nativeString("Automation not loaded."), style = ClawTheme.type.body, color = ClawTheme.colors.textMuted)
         }
       else ->
         CronJobDetailPanel(
@@ -2225,7 +2252,7 @@ private fun CronJobListRow(
   ClawDetailRow(
     title = job.name,
     subtitle = cronJobSubtitle(job),
-    modifier = Modifier.clickable(onClickLabel = nativeString("Open cron job detail"), onClick = onClick),
+    modifier = Modifier.clickable(onClickLabel = nativeString("Open automation detail"), onClick = onClick),
     leading = { ClawIconBadge(icon = Icons.Default.Bolt) },
     trailing = {
       Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -2361,7 +2388,7 @@ private fun copyCronDetailValue(
   value: String,
 ) {
   val clipboard = context.getSystemService(ClipboardManager::class.java) ?: return
-  clipboard.setPrimaryClip(ClipData.newPlainText("OpenClaw cron job $title", value))
+  clipboard.setPrimaryClip(ClipData.newPlainText("OpenClaw automation $title", value))
   Toast.makeText(context, nativeString("\$title copied", title), Toast.LENGTH_SHORT).show()
 }
 
@@ -2528,6 +2555,43 @@ private fun cronJobSubtitle(job: GatewayCronJobSummary): String =
     formatCronWake(job.nextRunAtMs),
     job.promptPreview.resolveNativeText(),
   )
+
+internal enum class CronJobsListFilter {
+  All,
+  Active,
+  Paused,
+  ;
+
+  val label: String
+    get() =
+      when (this) {
+        All -> nativeString("All")
+        Active -> nativeString("Active")
+        Paused -> nativeString("Paused")
+      }
+}
+
+internal fun filterCronJobs(
+  jobs: List<GatewayCronJobSummary>,
+  rawQuery: String,
+  filter: CronJobsListFilter,
+): List<GatewayCronJobSummary> {
+  val query = rawQuery.trim()
+  return jobs.filter { job ->
+    val statusMatches =
+      when (filter) {
+        CronJobsListFilter.All -> true
+        CronJobsListFilter.Active -> job.enabled
+        CronJobsListFilter.Paused -> !job.enabled
+      }
+    statusMatches &&
+      (
+        query.isEmpty() ||
+          listOf(job.name, job.scheduleLabel.resolveNativeText(), job.promptPreview.resolveNativeText())
+            .any { it.contains(query, ignoreCase = true) }
+      )
+  }
+}
 
 /** Summarizes a provider plan and most-used quota window for usage rows. */
 internal fun usageProviderSubtitle(provider: GatewayUsageProviderSummary): String {
