@@ -342,11 +342,15 @@ import {
   SessionFileEntrySchema,
   SessionFileKindSchema,
   SessionFileRelevanceSchema,
+  SessionPlacementSchema,
+  SessionPlacementStateSchema,
   SessionWorktreeInfoSchema,
   SessionsCreateParamsSchema,
   SessionsCreateResultSchema,
   SessionsDeleteParamsSchema,
   SessionsDescribeParamsSchema,
+  SessionsDispatchParamsSchema,
+  SessionsDispatchResultSchema,
   SessionGroupSchema,
   SessionsGroupsDeleteParamsSchema,
   SessionsGroupsListParamsSchema,
@@ -704,6 +708,8 @@ export const validateSessionsFilesSetParams = lazyCompile(SessionsFilesSetParams
 export const validateSessionsDiffParams = lazyCompile(SessionsDiffParamsSchema);
 export const validateSessionsCreateParams = lazyCompile(SessionsCreateParamsSchema);
 export const validateSessionsSendParams = lazyCompile(SessionsSendParamsSchema);
+export const validateSessionsDispatchParams = lazyCompile(SessionsDispatchParamsSchema);
+export const validateSessionsDispatchResult = lazyCompile(SessionsDispatchResultSchema);
 export const validateSessionsMessagesSubscribeParams = lazyCompile(
   SessionsMessagesSubscribeParamsSchema,
 );
@@ -1055,9 +1061,13 @@ export {
   SessionsCompactionGetParamsSchema,
   SessionsCompactionBranchParamsSchema,
   SessionsCompactionRestoreParamsSchema,
+  SessionPlacementStateSchema,
+  SessionPlacementSchema,
   SessionWorktreeInfoSchema,
   SessionsCreateParamsSchema,
   SessionsCreateResultSchema,
+  SessionsDispatchParamsSchema,
+  SessionsDispatchResultSchema,
   SessionsSendParamsSchema,
   SessionsAbortParamsSchema,
   SessionsPatchParamsSchema,
@@ -1596,7 +1606,11 @@ export type {
   SessionsDescribeParams,
   SessionsResolveParams,
   SessionOperationEvent,
+  SessionPlacementState,
+  SessionPlacement,
   SessionWorktreeInfo,
+  SessionsDispatchParams,
+  SessionsDispatchResult,
   SessionsCreateResult,
   SessionsPatchParams,
   SessionsResetParams,

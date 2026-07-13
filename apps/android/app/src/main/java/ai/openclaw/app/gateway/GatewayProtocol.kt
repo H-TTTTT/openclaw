@@ -367,6 +367,7 @@ enum class GatewayMethod(
   ApprovalGet("approval.get"),
   ApprovalResolve("approval.resolve"),
   SessionsSearch("sessions.search"),
+  SessionsDispatch("sessions.dispatch"),
 }
 
 enum class GatewayEvent(
