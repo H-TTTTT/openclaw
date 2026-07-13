@@ -16,7 +16,6 @@ import {
   MIGRATION_SKILL_SELECTION_TOGGLE_ALL_OFF,
   MIGRATION_SKILL_SELECTION_TOGGLE_ALL_ON,
   MIGRATION_PLUGIN_NOT_SELECTED_REASON,
-  MIGRATION_ITEM_NOT_SELECTED_REASON,
   MIGRATION_SKILL_NOT_SELECTED_REASON,
   reconcileInteractiveMigrationEnterValues,
   reconcileInteractiveMigrationShortcutValues,
@@ -186,13 +185,13 @@ describe("applyMigrationItemSelection", () => {
       ["memory:two"],
     );
 
-    expectItemStatus(selected.items, "memory:one", "skipped", MIGRATION_ITEM_NOT_SELECTED_REASON);
+    expectItemStatus(selected.items, "memory:one", "skipped", "not selected for migration");
     expectItemStatus(selected.items, "memory:two", "planned");
     expectItemStatus(
       selected.items,
       "memory:existing",
       "skipped",
-      MIGRATION_ITEM_NOT_SELECTED_REASON,
+      "not selected for migration",
     );
     expectSummaryFields(selected.summary, { planned: 1, skipped: 2, conflicts: 0 });
   });

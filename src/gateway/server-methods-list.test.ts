@@ -85,12 +85,14 @@ describe("listGatewayMethods", () => {
       "exec.approval.get",
     ]);
     expect(methods).toContain("tts.speak");
-    expect(coreMethods.slice(-5)).toEqual([
+    expect(coreMethods.slice(-7)).toEqual([
       "sessions.catalog.continue",
       "sessions.catalog.archive",
       "approval.get",
       "approval.resolve",
       "sessions.search",
+      "migrations.memory.plan",
+      "migrations.memory.apply",
     ]);
     expect(methods.indexOf("approval.get")).toBeGreaterThan(methods.indexOf("tts.speak"));
     expect(methods.indexOf("approval.resolve")).toBe(methods.indexOf("approval.get") + 1);
