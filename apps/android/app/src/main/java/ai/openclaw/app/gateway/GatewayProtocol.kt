@@ -367,8 +367,6 @@ enum class GatewayMethod(
   ApprovalGet("approval.get"),
   ApprovalResolve("approval.resolve"),
   SessionsSearch("sessions.search"),
-  MigrationsMemoryPlan("migrations.memory.plan"),
-  MigrationsMemoryApply("migrations.memory.apply"),
 }
 
 enum class GatewayEvent(

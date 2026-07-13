@@ -11,7 +11,7 @@ import { MIGRATION_CONFLICT_REASON_PHRASES } from "./output.js";
 // Public selection tokens and skip reasons shared with prompt tests and apply filtering.
 export const MIGRATION_SKILL_NOT_SELECTED_REASON = "not selected for migration";
 export const MIGRATION_PLUGIN_NOT_SELECTED_REASON = "not selected for migration";
-const MIGRATION_ITEM_NOT_SELECTED_REASON = "not selected for migration";
+export const MIGRATION_ITEM_NOT_SELECTED_REASON = "not selected for migration";
 export const MIGRATION_SELECTION_ACCEPT = "__openclaw_migrate_accept_recommended__";
 export const MIGRATION_SELECTION_TOGGLE_ALL_ON = "__openclaw_migrate_toggle_all_on__";
 export const MIGRATION_SELECTION_TOGGLE_ALL_OFF = "__openclaw_migrate_toggle_all_off__";

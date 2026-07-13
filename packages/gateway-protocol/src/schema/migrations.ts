@@ -114,6 +114,7 @@ export const MigrationsMemoryApplyResultSchema = Type.Object(
 
 export type MemoryMigrationItemStatus = Static<typeof MemoryMigrationItemStatusSchema>;
 export type MemoryMigrationItem = Static<typeof MemoryMigrationItemSchema>;
+export type MemoryMigrationSummary = Static<typeof MemoryMigrationSummarySchema>;
 export type MemoryMigrationProviderPlan = Static<typeof MemoryMigrationProviderPlanSchema>;
 export type MigrationsMemoryPlanParams = Static<typeof MigrationsMemoryPlanParamsSchema>;
 export type MigrationsMemoryPlanResult = Static<typeof MigrationsMemoryPlanResultSchema>;
